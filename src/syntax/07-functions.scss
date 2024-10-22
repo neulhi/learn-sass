@@ -49,8 +49,9 @@ $value-2: 5;
 	width: math.div($value-1, $value-2);
 }
 
-@debug $value-1 * $value-2;
-@debug 'Helvetica' + ' ' + 'Neue'; // 'Helvetica Neue'
+// 'Helvetica Neue'
+// @debug $value-1 * $value-2;
+// @debug 'Helvetica' + ' ' + 'Neue'; 
 
 
 // ? 문자 연산자

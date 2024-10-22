@@ -59,7 +59,7 @@
 		}
 	} 
 
-	@elseif $type == "desktop" {
+	@else if $type == "desktop" {
 		@media (min-width:768px) {
 			@content;
 		}
