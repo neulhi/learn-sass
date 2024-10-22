@@ -1,7 +1,5 @@
 @use "sass:math";
 
-// ? 단위를 제거하는 함수
-// 나눗셈 연산 (10px / 5px = 2)
 @function removeUnit($value) {
 	@return math.div($value, ($value * 0 + 1));
 }
