@@ -1,0 +1,19 @@
+// (as *을 사용하면 네임스페이스 없이 접근 가능)
+// (as 로 별칭 추가)
+// 변수는 앞에 $ 꼭 붙이기
+
+// @use "./techit/utils" as *;
+// @use "./techit/likelion" as lion;
+
+// @forward 규칙 - _index.scss 참고 (폴더 안의 파일 경로 생략 가능)
+@use "./techit";
+
+
+
+// 변수 앞에 @use로 네임스페이스 필수!
+.wrapper {
+	border: 1px solid red;
+	@include techit.utils-size(200px, 150px);
+	margin: techit.$lion-spacing-1;
+	// padding: $spacing-2;
+}
