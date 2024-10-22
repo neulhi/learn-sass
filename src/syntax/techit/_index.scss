@@ -1,0 +1,5 @@
+@forward "./utils" as utils-*;
+@forward "./likelion" as lion-*;
+
+// as 접두사-* (접두사 추가 방법)
+// -index.scss는 묶는 역할(체계적인 관리를 위해서)
