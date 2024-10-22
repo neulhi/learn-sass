@@ -1,6 +1,7 @@
 @use "sass:meta";
 @use "sass:math";
 
+// ? 데이터 타입(data types)
 $nothing: null;
 
 $num: 101;
@@ -35,29 +36,6 @@ $theme: (
   @return math.unit($value);
 }
 
-// ? 연산자
-$value-1: 10px;
-$value-2: 5;
-
-.container {
-	animation-delay: 9s + 21s;
-	// width: $value-1 + $value-2;
-	// width: calc($value-1 - $value-2);
-	// width: $value-1 * $value-2;
-	// width: (10px / 5);
-	width: math.div($value-1, $value-2);
-}
-
-@debug $value-1 * $value-2;
-@debug 'Helvetica' + ' ' + 'Neue'; // 'Helvetica Neue'
-
-// ? 문자 연산자
-$word1: 'Helvetica';
-$word2: 'Neue';
-$word3: sans;
-$word4: serif;
-
-// ? 데이터 타입(data types)
 // JavaScript의 null 또는 undefined와 유사한 개념으로, Sass는 null만 지원합니다.
 @debug meta.type-of($nothing); // Debug: null
 
@@ -95,3 +73,39 @@ $word4: serif;
 @debug calc(400px + 10%);            // calc(400px + 10%)
 @debug calc(400px / 2);              // 200px
 @debug min(100px, calc(1rem + 10%)); // min(100px, 1rem + 10%)
+
+
+// ? 연산자
+$value-1: 10px;
+$value-2: 5;
+
+.container {
+	animation-delay: 9s + 21s;
+	// width: $value-1 + $value-2;
+	// width: calc($value-1 - $value-2);
+	// width: $value-1 * $value-2;
+	// width: (10px / 5);
+	width: math.div($value-1, $value-2);
+}
+
+@debug $value-1 * $value-2;
+@debug 'Helvetica' + ' ' + 'Neue'; // 'Helvetica Neue'
+
+
+// ? 문자 연산자
+$word1: 'Helvetica';
+$word2: 'Neue';
+$word3: sans;
+$word4: serif;
+
+// 문자 연산에 있어 +, - 연산자에 의존하기 보다 인터폴레이션을 사용하는 것이 명확합니다.
+.box {
+	font-family: "#{$word1 $word2}", #{$word3 - $word4};
+}
+
+// ? 리스트 비교
+// 내용이 같으면 리스트 또한 동일합니다. 쉼표로 구분된 리스트는 공백으로 구분된 리스트와 다르며, 대괄호로 묶인 리스트 또한 대괄호가 없는 리스트와 다릅니다.
+@debug (5px 7px 10px) == (5px 7px 10px);   // true
+@debug (5px 7px 10px) != (10px 14px 20px); // true
+@debug (5px 7px 10px) != (5px, 7px, 10px); // true
+@debug (5px 7px 10px) != [5px 7px 10px];   // true
