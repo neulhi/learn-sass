@@ -109,3 +109,31 @@ $word4: serif;
 @debug (5px 7px 10px) != (10px 14px 20px); // true
 @debug (5px 7px 10px) != (5px, 7px, 10px); // true
 @debug (5px 7px 10px) != [5px 7px 10px];   // true
+
+
+// ? 단위를 제거하는 함수
+// 나눗셈 연산 (10px / 5px = 2)
+@function removeUnit($value) {
+	@return math.div($value, ($value * 0 + 1));
+}
+
+@function rem($value, $base: 16) {
+	@return math.div(removeUnit($value), $base) * 1rem;
+}
+
+@function em($value, $base) {
+	@return math.div(removeUnit($value), removeUnit($base)) * 1em;
+}
+
+.box-2 {
+	line-height: removeUnit(20%);
+}
+
+.box-3 {
+	font-size: rem(24px);
+}
+
+.box-4 {
+	font-size: em(24px, 14px);
+}
+
