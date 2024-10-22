@@ -13,7 +13,7 @@
 
 @mixin size($width, $height:null) {
 	@include inline-size($width);
-	
+
 	@if $height != null {
 		@include block-size($height);
 	}
