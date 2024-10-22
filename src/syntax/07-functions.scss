@@ -117,6 +117,7 @@ $word4: serif;
 	@return math.div($value, ($value * 0 + 1));
 }
 
+// ? 옵션 인자 
 @function rem($value, $base: 16) {
 	@return math.div(removeUnit($value), $base) * 1rem;
 }
