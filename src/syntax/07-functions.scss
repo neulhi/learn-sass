@@ -36,45 +36,6 @@ $theme: (
   @return math.unit($value);
 }
 
-// JavaScript의 null 또는 undefined와 유사한 개념으로, Sass는 null만 지원합니다.
-@debug meta.type-of($nothing); // Debug: null
-
-// JavaScript의 number와 유사한 개념이지만, Sass에서는 단위 값을 가진 경우 또한 number입니다.
-@debug meta.type-of($num);   // Debug: number
-@debug meta.type-of($unit); // Debug: number 
-
-// JavaScript의 string과 달리, Sass는 인용 부호가 없어도 string입니다.
-@debug meta.type-of($pretendard); // Debug: string
-@debug meta.type-of($spoqa);      // Debug: string
-
-// JavaScript에는 존재하지 않는 데이터 타입이지만, Sass는 컬러 타입을 지원합니다.
-@debug meta.type-of($hex);            // Debug: color
-@debug meta.type-of($keyword);        // Debug: color
-@debug meta.type-of($color-function); // Debug: color
-
-// JavaScript의 boolean 타입과 동일한 개념으로, Sass에서는 bool 타입입니다.
-@debug meta.type-of($yes); // Debug: bool
-@debug meta.type-of($no);  // Debug: bool
-@debug meta.type-of($units);          // Debug: list
-@debug meta.type-of($font-families);  // Debug: list
-@debug meta.type-of($square-bracket); // Debug: list
-
-// JavaScript의 object 타입과 비슷한 개념으로, Sass에서는 괄호(())를 사용해 표현합니다.
-@debug meta.type-of($theme); // Debug: map
-
-// ## function
-// JavaScript 함수 타입처럼 Sass 함수 또한 값이 될 수 있습니다.
-@debug getUnit(10);   // ''
-@debug getUnit(20px); // 'px'
-@debug getUnit(30%);  // '%'
-
-// ## calculation
-// 계산(calculation) 타입은 `calc()`, `clamp()`, `min()`, `max()`와 같은 함수를 나타내는 방법을 말합니다. Sass는 이러한 함수들이 서로 함께 사용되더라도 간단하게 사용 가능하도록 처리합니다.
-@debug calc(400px + 10%);            // calc(400px + 10%)
-@debug calc(400px / 2);              // 200px
-@debug min(100px, calc(1rem + 10%)); // min(100px, 1rem + 10%)
-
-
 // ? 연산자
 $value-1: 10px;
 $value-2: 5;
@@ -105,10 +66,11 @@ $word4: serif;
 
 // ? 리스트 비교
 // 내용이 같으면 리스트 또한 동일합니다. 쉼표로 구분된 리스트는 공백으로 구분된 리스트와 다르며, 대괄호로 묶인 리스트 또한 대괄호가 없는 리스트와 다릅니다.
-@debug (5px 7px 10px) == (5px 7px 10px);   // true
-@debug (5px 7px 10px) != (10px 14px 20px); // true
-@debug (5px 7px 10px) != (5px, 7px, 10px); // true
-@debug (5px 7px 10px) != [5px 7px 10px];   // true
+// true
+// @debug (5px 7px 10px) == (5px 7px 10px);   
+// @debug (5px 7px 10px) != (10px 14px 20px); 
+// @debug (5px 7px 10px) != (5px, 7px, 10px); 
+// @debug (5px 7px 10px) != [5px 7px 10px];   
 
 
 // ? 단위를 제거하는 함수
