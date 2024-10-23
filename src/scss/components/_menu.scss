@@ -1,0 +1,32 @@
+@use "./../base";
+@use "./../abstracts" as *;
+
+.menu {
+  @include text-size(3xl);
+  @include flex-container(column);
+  @include gap(base);
+  padding: rem(48px);
+
+  @include mq(lg) {
+    @include text-size(xs);
+    @include flex-container(row justify-between);
+    padding: 0;
+  }
+}
+
+// .menu {
+// 	width: 100%;
+// 	inline-size: 100%;
+// 	display: inline-flex;
+// 	flex-flow: column nowrap; 
+//  justify-content: space-between;
+
+// 	@include mq(lg) {
+// 		flex-direction: row;
+// 	}
+// }
+
+// .menu__item {
+// 	list-style: none;
+// 	display: inline-flex;
+// }
