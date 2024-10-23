@@ -2,58 +2,50 @@
 @use "./../abstracts" as *;
 @use "./icons";
 
-// 슬비쌤
+// 슬비썜
 .combobox {
-	$light-text-color: $secondary-color;
-	$dark-text-color: $accent-color;
+  $light-text-color: $secondary-color;
+  $dark-text-color: $accent-color;
+  $font-mobile: $text-sm;
+  $font-desktop: $text-xl;
 
-	$font-mobile: $text-sm;
-	$font-desktop: $text-lg;
+  color: light-dark($light-text-color, $dark-text-color);
 
-	color: light-dark($light-text-color, $dark-text-color);
+  border: 1px solid currentColor;
+  @include flex-container(justify-center items-center row wrap, inline-flex);
+  @include rounded();
+  font-size: $font-mobile;
+  @include mq(lg) {
+    font-size: $font-desktop;
+  }
+  @include relative-container(svg);
 
-	margin: 50px;
-	border: 1px solid currentColor;
-	// display: inline-flex;
-	// flex-flow: row nowrap;
-	// align-items: center;
-	// border-radius: 16px;
-	@include flex-container(row nowrap items-center, inline-flex);
+  svg {
+    pointer-events: none;
+    font-size: $font-mobile;
+    @include mq(lg) {
+      font-size: $font-desktop;
+    }
 
-	@include rounded();
-	font-size: $font-mobile;
-	@media (min-width: lg) {
-		font-size: $font-desktop;
-	}
-	
-	@media (min-width: lg) {
-		font-size: 18px;
-	}
+    &:nth-of-type(1) {
+      left: $spacing-sm;
+    }
+    &:nth-of-type(2) {
+      right: $spacing-sm;
+    }
+  }
 
-	@include relative-container(svg);
+  label {
+    @include a11y-hidden;
+  }
 
-	svg {
-		pointer-events: none;
-		&:nth-of-type(1) {
-			inset-inline-start: $spacing-sm;
-		}
-
-		&:nth-of-type(2) {
-			inset-inline-end: $spacing-sm;
-		}
-	}
-
-	label {
-		@include a11y-hidden;
-	}
-
-	select {
-		color: inherit;
-		appearance: none;
-		border: 0;
-		padding: $spacing-base $spacing-5xl;
-		background-color: transparent;
-	}
+  select {
+    color: inherit;
+    appearance: none;
+    border: 0;
+    padding: $spacing-base $spacing-5xl;
+    background-color: transparent;
+  }
 }
 
 
