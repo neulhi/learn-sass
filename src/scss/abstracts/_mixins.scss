@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "sass:string";
 @use "sass:math";
+@use "./variables" as *;
 
 // 숨김 콘텐츠 믹스인
 @mixin a11y-hidden {
@@ -16,17 +17,15 @@
   border-width: 0;
 }
 
-// 가로, 세로 크기를 설정하는 믹스인
-// inline-size , block-size
-
+// Size 관련 믹스인
 @mixin inline-size($value) {
-	width: $value;
-	inline-size: $value;
+  width: $value;
+  inline-size: $value;
 }
 
 @mixin block-size($value) {
-	height: $value;
-	block-size: $value;
+  height: $value;
+  block-size: $value;
 }
 
 @mixin size-square($value) {
@@ -34,12 +33,12 @@
   @include block-size($value);
 }
 
-@mixin size($width, $height:null) {
-	@include inline-size($width);
+@mixin size($width, $height: null) {
+  @include inline-size($width);
 
-	@if $height != null {
-		@include block-size($height);
-	}
+  @if $height != null {
+    @include block-size($height);
+  }
 }
 
 @mixin size-square-icon($value) {
@@ -157,14 +156,6 @@ $breakpoints: (
 }
 
 // Position 관련 믹스인
-// @mixin relative-container($selector) {
-// 	position: relative;
-
-// 	${$selector} {
-// 		@include 
-// 	}
-// }
-
 @mixin relative-container($selector, $positionY: 50%, $translateY: -50%) {
   position: relative;
 
@@ -176,7 +167,7 @@ $breakpoints: (
   }
 }
 
-// Flexbox 믹스인
+// FlexBox 믹스인
 @mixin flex-container($args, $mode: flex) {
   display: if($mode == flex, flex, inline-flex);
   @include flex-container-append($args);
@@ -203,261 +194,270 @@ $breakpoints: (
     }
 
     // justify-content ------------------------------------------
-    @each $justifyContent
-      in justify-start
-      justify-center
-      justify-end
-      justify-left
-      justify-right
-      justify-normal
-      justify-between
-      justify-around
-      justify-evenly
-      justify-safe
-      justify-unsafe
-      justify-inherit
-      justify-initial
-      justify-unset
-    {
+    @each $justifyContent in justify-start justify-center justify-end justify-left justify-right justify-normal justify-between justify-around justify-evenly justify-safe justify-unsafe justify-inherit justify-initial justify-unset {
       $justifyContent-index: index($args, $justifyContent);
 
       @if $justifyContent-index {
-        $justifyContent-value: str-replace(
-          nth($args, $justifyContent-index),
-          'justify-'
-        );
+        $justifyContent-value: str-replace(nth($args, $justifyContent-index), "justify-");
         @include justify-content($justifyContent-value, flex);
       }
     }
 
     // align-items ------------------------------------------------
-    @each $alignItems
-      in items-normal
-      items-stretch
-      items-start
-      items-end
-      items-center
-      items-baseline
-      items-first-baseline
-      items-last-baseline
-      items-safe
-      items-unsafe
-      items-inherit
-      items-initial
-      items-unset
-    {
+    @each $alignItems in items-normal items-stretch items-start items-end items-center items-baseline items-first-baseline items-last-baseline items-safe items-unsafe items-inherit items-initial items-unset {
       $alignItems-index: index($args, $alignItems);
 
       @if $alignItems-index {
-        $alignItems-value: str-replace(nth($args, $alignItems-index), 'items-');
+        $alignItems-value: str-replace(nth($args, $alignItems-index), "items-");
         @include align-items($alignItems-value, flex);
       }
     }
 
     // align-content ------------------------------------------------
-    @each $alignContent
-      in content-start
-      content-center
-      content-end
-      content-left
-      content-right
-      content-normal
-      content-baseline
-      content-first-baseline
-      content-last-baseline
-      content-between
-      content-around
-      content-evenly
-      content-stretch
-      content-safe
-      content-unsafe
-      content-inherit
-      content-initial
-      content-unset
-    {
+    @each $alignContent in content-start content-center content-end content-left content-right content-normal content-baseline content-first-baseline content-last-baseline content-between content-around content-evenly content-stretch content-safe content-unsafe content-inherit content-initial content-unset {
       $alignContent-index: index($args, $alignContent);
 
       @if $alignContent-index {
-        $alignContent-value: str-replace(
-          nth($args, $alignContent-index),
-          'content-'
-        );
+        $alignContent-value: str-replace(nth($args, $alignContent-index), "content-");
         @include align-content($alignContent-value, flex);
       }
     }
   }
 }
-
-@function str-replace($string, $search, $replace: '') {
+@function str-replace($string, $search, $replace: "") {
   $index: str-index($string, $search);
 
   @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace +
-      str-replace(
-        str-slice($string, $index + str-length($search)),
-        $search,
-        $replace
-      );
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
   }
 
   @return $string;
 }
 
 @mixin justify-content($value, $mode: grid) {
-  @if $value == 'start' {
+  @if $value == "start" {
     justify-content: if($mode == grid, start, flex-start);
   }
-  @if $value == 'end' {
+  @if $value == "end" {
     justify-content: if($mode == grid, end, flex-end);
   }
-  @if $value == 'center' {
+  @if $value == "center" {
     justify-content: center;
   }
-  @if $value == 'left' {
+  @if $value == "left" {
     justify-content: left;
   }
-  @if $value == 'right' {
+  @if $value == "right" {
     justify-content: right;
   }
 
-  @if $value == 'normal' {
+  @if $value == "normal" {
     justify-content: normal;
   }
 
-  @if $value == 'between' {
+  @if $value == "between" {
     justify-content: space-between;
   }
-  @if $value == 'around' {
+  @if $value == "around" {
     justify-content: space-around;
   }
-  @if $value == 'evenly' {
+  @if $value == "evenly" {
     justify-content: space-evenly;
   }
-  @if $value == 'stretch' {
+  @if $value == "stretch" {
     justify-content: stretch;
   }
 
-  @if $value == 'safe' {
+  @if $value == "safe" {
     justify-content: safe center;
   }
-  @if $value == 'unsafe' {
+  @if $value == "unsafe" {
     justify-content: unsafe center;
   }
 
-  @if $value == 'inherit' {
+  @if $value == "inherit" {
     justify-content: inherit;
   }
-  @if $value == 'initial' {
+  @if $value == "initial" {
     justify-content: initial;
   }
-  @if $value == 'unset' {
+  @if $value == "unset" {
     justify-content: unset;
   }
 }
-
 @mixin align-items($value, $mode: grid) {
-  @if $value == 'normal' {
+  @if $value == "normal" {
     align-items: normal;
   }
-  @if $value == 'stretch' {
+  @if $value == "stretch" {
     align-items: stretch;
   }
 
-  @if $value == 'start' {
+  @if $value == "start" {
     align-items: if($mode == grid, start, flex-start);
   }
-  @if $value == 'end' {
+  @if $value == "end" {
     align-items: if($mode == grid, end, flex-end);
   }
-  @if $value == 'center' {
+  @if $value == "center" {
     align-items: center;
   }
 
-  @if $value == 'baseline' {
+  @if $value == "baseline" {
     align-items: baseline;
   }
-  @if $value == 'first-baseline' {
+  @if $value == "first-baseline" {
     align-items: first baseline;
   }
-  @if $value == 'last-baseline' {
+  @if $value == "last-baseline" {
     align-items: last baseline;
   }
-  @if $value == 'safe' {
+  @if $value == "safe" {
     align-items: safe center;
   }
-  @if $value == 'unsafe' {
+  @if $value == "unsafe" {
     align-items: unsafe center;
   }
 
-  @if $value == 'inherit' {
+  @if $value == "inherit" {
     align-items: inherit;
   }
-  @if $value == 'initial' {
+  @if $value == "initial" {
     align-items: initial;
   }
-  @if $value == 'unset' {
+  @if $value == "unset" {
     align-items: unset;
   }
 }
-
 @mixin align-content($value, $mode: grid) {
-  @if $value == 'start' {
+  @if $value == "start" {
     align-content: if($mode == grid, start, flex-start);
   }
-  @if $value == 'end' {
+  @if $value == "end" {
     align-content: if($mode == grid, end, flex-end);
   }
-  @if $value == 'center' {
+  @if $value == "center" {
     align-content: center;
   }
-  @if $value == 'left' {
+  @if $value == "left" {
     align-content: left;
   }
-  @if $value == 'right' {
+  @if $value == "right" {
     align-content: right;
   }
 
-  @if $value == 'normal' {
+  @if $value == "normal" {
     align-content: normal;
   }
 
-  @if $value == 'baseline' {
+  @if $value == "baseline" {
     align-content: baseline;
   }
-  @if $value == 'first-baseline' {
+  @if $value == "first-baseline" {
     align-content: first baseline;
   }
-  @if $value == 'last-baseline' {
+  @if $value == "last-baseline" {
     align-content: last baseline;
   }
 
-  @if $value == 'between' {
+  @if $value == "between" {
     align-content: space-between;
   }
-  @if $value == 'around' {
+  @if $value == "around" {
     align-content: space-around;
   }
-  @if $value == 'evenly' {
+  @if $value == "evenly" {
     align-content: space-evenly;
   }
-  @if $value == 'stretch' {
+  @if $value == "stretch" {
     align-content: stretch;
   }
 
-  @if $value == 'safe' {
+  @if $value == "safe" {
     align-content: safe center;
   }
-  @if $value == 'unsafe' {
+  @if $value == "unsafe" {
     align-content: unsafe center;
   }
 
-  @if $value == 'inherit' {
+  @if $value == "inherit" {
     align-content: inherit;
   }
-  @if $value == 'initial' {
+  @if $value == "initial" {
     align-content: initial;
   }
-  @if $value == 'unset' {
+  @if $value == "unset" {
     align-content: unset;
+  }
+}
+
+// 여백 (padding, margin)
+@mixin padding-inline-start($value) {
+  padding-left: $value;
+  padding-inline-start: $value;
+}
+@mixin padding-inline-end($value) {
+  padding-right: $value;
+  padding-inline-end: $value;
+}
+@mixin padding-block-start($value) {
+  padding-top: $value;
+  padding-block-start: $value;
+}
+@mixin padding-block-end($value) {
+  padding-bottom: $value;
+  padding-block-end: $value;
+}
+
+@mixin paddingX($paddingX) {
+  @include padding-inline-start($paddingX);
+  @include padding-inline-end($paddingX);
+}
+@mixin paddingY($paddingY) {
+  @include padding-block-start($paddingY);
+  @include padding-block-end($paddingY);
+}
+
+@mixin padding($paddingX, $paddingY: null) {
+  @include paddingX($paddingX);
+  @if $paddingY == null {
+    @include paddingY($paddingX);
+  } @else {
+    @include paddingY($paddingY);
+  }
+}
+
+@mixin margin-inline-start($value) {
+  margin-left: $value;
+  margin-inline-start: $value;
+}
+@mixin margin-inline-end($value) {
+  margin-right: $value;
+  margin-inline-end: $value;
+}
+@mixin margin-block-start($value) {
+  margin-top: $value;
+  margin-block-start: $value;
+}
+@mixin margin-block-end($value) {
+  margin-bottom: $value;
+  margin-block-end: $value;
+}
+
+@mixin marginX($marginX) {
+  @include margin-inline-start($marginX);
+  @include margin-inline-end($marginX);
+}
+@mixin marginY($marginY) {
+  @include margin-block-start($marginY);
+  @include margin-block-end($marginY);
+}
+
+@mixin margin($marginX, $marginY: null) {
+  @include marginX($marginX);
+  @if $marginY == null {
+    @include marginY($marginX);
+  } @else {
+    @include marginY($marginY);
   }
 }
