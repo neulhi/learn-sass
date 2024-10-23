@@ -1,7 +1,16 @@
+@use "./../base";
+@use "./../abstracts" as *;
+@use "./icons";
+
 // 슬비쌤
 .combobox {
+	$light-text-color: $secondary-color;
+	$dark-text-color: $accent-color;
+
+	color: light-dark($light-text-color, $dark-text-color);
+
 	margin: 50px;
-	border: 1px solid red;
+	border: 1px solid currentColor;
 	// display: inline-flex;
 	// flex-flow: row nowrap;
 	// align-items: center;
@@ -43,20 +52,20 @@
 	}
 
 	select {
+		color: inherit;
 		appearance: none;
 		border: 0;
 		padding: 0 24px;
-		// background-color: transparent;
+		background-color: transparent;
 	}
 }
 
 
-
 // 하늘
 // 컬러 변수
-$gray: #757575;
-$red: #E50914;
-$white: #fff;
+$hn-gray: #757575;
+$hn-red: #E50914;
+$hn-white: #fff;
 
 
 @mixin sr-only() {
@@ -71,9 +80,9 @@ $white: #fff;
 	border-width: 0;
 }
 
-@mixin size($width, $height) {
-	width: $width;
-	height: $height;
+@mixin hn-size($hn-width, $hn-height) {
+	width: $hn-width;
+	height: $hn-height;
 }
 
 .header-title {
@@ -81,7 +90,7 @@ $white: #fff;
 }
 
 .combo-ui {
-	@include size(100%, auto);
+	@include hn-size(100%, auto);
 	display: flex;
 	flex-flow: row nowrap;
 	gap: 1.5rem;
@@ -89,10 +98,10 @@ $white: #fff;
 }
 
 .combo__select {
-	@include size(113px, 40px);
-	color: $gray;
+	@include hn-size(113px, 40px);
+	color: $hn-gray;
 	appearance: none;
-	border: 1px solid $gray;
+	border: 1px solid $hn-gray;
 	border-radius: .125rem;
 	text-align: center;
 	background-image: 
@@ -103,10 +112,10 @@ $white: #fff;
 }
 
 .button-login {
-	@include size(auto, 40px);
+	@include hn-size(auto, 40px);
 	border: 0;
-	background-color: $red;
-	color: $white;
+	background-color: $hn-red;
+	color: $hn-white;
 	font-size: 1rem;
 	font-weight: 700;
 	padding: 0.75rem 1.25rem;
