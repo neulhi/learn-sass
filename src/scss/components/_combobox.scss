@@ -7,6 +7,9 @@
 	$light-text-color: $secondary-color;
 	$dark-text-color: $accent-color;
 
+	$font-mobile: $text-sm;
+	$font-desktop: $text-lg;
+
 	color: light-dark($light-text-color, $dark-text-color);
 
 	margin: 50px;
@@ -14,48 +17,41 @@
 	// display: inline-flex;
 	// flex-flow: row nowrap;
 	// align-items: center;
-	// padding: 6px 16px;
-	border-radius: 16px;
-	display: inline-flex;
-	position: relative;
-	font-size: 14px;
+	// border-radius: 16px;
+	@include flex-container(row nowrap items-center, inline-flex);
 
-	@media (min-width: 1024px) {
+	@include rounded();
+	font-size: $font-mobile;
+	@media (min-width: lg) {
+		font-size: $font-desktop;
+	}
+	
+	@media (min-width: lg) {
 		font-size: 18px;
 	}
 
+	@include relative-container(svg);
+
 	svg {
-		position: absolute;
-		inset-block-start: 50%;
-		translate: 0 -50%;
 		pointer-events: none;
-		
 		&:nth-of-type(1) {
-			inset-inline-start: 8px;
+			inset-inline-start: $spacing-sm;
 		}
 
 		&:nth-of-type(2) {
-			inset-inline-end: 8px;
+			inset-inline-end: $spacing-sm;
 		}
 	}
 
 	label {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border-width: 0;
+		@include a11y-hidden;
 	}
 
 	select {
 		color: inherit;
 		appearance: none;
 		border: 0;
-		padding: 0 24px;
+		padding: $spacing-base $spacing-5xl;
 		background-color: transparent;
 	}
 }
