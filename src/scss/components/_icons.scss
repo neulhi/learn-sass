@@ -1,0 +1,16 @@
+@use "./../base";
+@use "./../abstracts" as *;
+
+
+// SVG 아이콘
+.svg-icon {
+	@include size-square(12);
+
+	@include mq(lg) {
+		@include size-square(16);
+	}
+
+	// @media (min-width: 1024px) {
+	// 	@include size(16px, 16px);
+	// }
+}  
